@@ -27,17 +27,27 @@ var massive string = "73167176531330624919225119674426574742355349194934" +
 "71636269561882670428252483600823257530420752963450"
  
 func main() {
-  var i int = 0;
+  var i int = 0
+  var largest int = 0
   
   for ; i < len(massive) - 5; i++ {
     var j,k,l,m,n int = 0,0,0,0,0
-    
-    j = strconv.Atoi(string(massive[i]))
-    k = strconv.Atoi(massive[i + 1])
-    l = strconv.Atoi(massive[i + 2])
-    m = strconv.Atoi(massive[i + 3])
-    n = strconv.Atoi(massive[i + 4])
+    var err error
 
-    fmt.Println("at %d: %d %d %d %d %d\n", i, j, k, l, m, n)
+    j, err = strconv.Atoi(string(massive[i]))
+    k, err = strconv.Atoi(string(massive[i + 1]))
+    l, err = strconv.Atoi(string(massive[i + 2]))
+    m, err = strconv.Atoi(string(massive[i + 3]))
+    n, err = strconv.Atoi(string(massive[i + 4]))
+
+    if err != nil {
+      fmt.Println("there was an error")
+    }
+
+    var product int = j * k * l * m * n
+    if product > largest {
+      largest = product
+      fmt.Printf("largest is: %d\n", largest)
+    }
   }
 }
